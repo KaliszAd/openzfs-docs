@@ -330,7 +330,7 @@ Step 2: Disk Formatting
 
    - LUKS::
 
-       apt install --yes cryptsetup
+       apt install --yes cryptsetup cryptsetup-initramfs
 
        cryptsetup luksFormat -c aes-xts-plain64 -s 512 -h sha256 ${DISK}-part4
        cryptsetup luksOpen ${DISK}-part4 luks1
@@ -636,7 +636,7 @@ Step 4: System Configuration
 
 #. For LUKS installs only, setup ``/etc/crypttab``::
 
-     apt install --yes cryptsetup
+     apt install --yes cryptsetup cryptsetup-initramfs
 
      echo luks1 /dev/disk/by-uuid/$(blkid -s UUID -o value ${DISK}-part4) \
          none luks,discard,initramfs > /etc/crypttab
@@ -1101,7 +1101,7 @@ Go through `Step 1: Prepare The Install Environment
 
 For LUKS, first unlock the disk(s)::
 
-  apt install --yes cryptsetup
+  apt install --yes cryptsetup cryptsetup-initramfs
 
   cryptsetup luksOpen /dev/disk/by-id/scsi-SATA_disk1-part4 luks1
   # Repeat for additional disks, if this is a mirror or raidz topology.
